@@ -1,0 +1,21 @@
+На изображении представлен презентационный слайд проекта под названием «Perceiver-VAE: A Universal Latent Codec for Weather Fields». В правом нижнем углу слайда размещен логотип института «AIRI» и номер страницы «31».
+## Текстовые блоки
+
+* Заголовок: Perceiver-VAE: A Universal Latent Codec for Weather Fields
+* Раздел Description: Текст описывает идею использования подхода Perceiver IO (из базовой модели погоды Aurora) для универсального кодирования метеорологических переменных в единое латентное пространство VAE. Упоминается тонкая настройка (fine-tuning) предобученных моделей для новых типов переменных. Основные сферы применения: сжатие погодных полей (compression of weather fields) и построение прогностических моделей прямо на универсальных латентных признаках (building forecasting models directly on the universal VAE latents).
+* Раздел Tasks: Содержит три маркированных пункта:
+* Unify & tokenize data: создание даталоадеров для реанализов, приземных полей, спутниковых снимков; кодирование признаков с позиционными/сферическими свойствами; обработка масок и пропущенных значений.
+   * Train the codec: обучение Perceiver-IO VAE с целевой функцией rate-distortion; добавление физических и спектральных регуляризаторов; обучение по расписанию от грубого к тонкому (coarse → fine); использование mixed-precision и activation checkpointing.
+   * Query-driven decoding & evaluation: проектирование головок декодера, учитывающих переменные и уровни; поддержка произвольных выходных сеток; оценка метрик RMSE/ACC/CRPS и спектров мощности.
+* Раздел Links: Содержит четыре кликабельные гиперссылки зеленого цвета:
+* Perceiver IO: A General Architecture for Structured Inputs & Outputs (ICML 2022)
+   * CRA5: Extreme Compression of ERA5 for Portable Global Climate and Weather Research via an Efficient Variational Transformer
+   * Aurora: A Foundation Model for the Earth System
+
+## Иллюстрации (в левой части)
+
+* Левая верхняя схема: Детальная архитектурная диаграмма The Perceiver IO architecture.. На ней показаны три входных массива данных (Input array, Latent array, Output query array) и три последовательных процесса обработки: Encode (зеленый пунктирный блок), Process x L (фиолетовый пунктирный блок) и Decode (оранжевый пунктирный блок). Внутри блоков изображены матрицы и операции Cross-Attention с обозначениями векторов запросов, ключей и значений (Q, K, V).
+* Левая нижняя схема: Упрощенная блок-схема Perceiver-based Weather Model.. Она демонстрирует конвейер прогнозирования во времени: от входного глобуса Земли в моменты времени TIMES (T-1, T) через блоки 3D PERCEIVER ENCODER, латентную сетку кубов, блок 3D SWIN TRANSFORMER UNET + LoRA, выходную латентную сетку и блок 3D PERCEIVER DECODER к прогнозируемому глобусу в момент TIME T+1.
+
+Если вам необходимо перевести текст со слайда или подробнее разобрать архитектурные шаги блоков Encode и Decode, сообщите об этом.
+

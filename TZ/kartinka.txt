@@ -1,0 +1,81 @@
+На схеме изображена архитектура нейросети для прогнозирования атмосферных данных.
+## Структура схемы (слева направо)
+
+* 🌍 Входные данные: Изображение Земли. Подпись: TIMES (T - 1, T).
+* ➡️ Стрелка: Ведет к первому блоку.
+* 📦 Энкодер: Блок 3D PERCEIVER ENCODER.
+* 📝 Подпись энкодера: ARBITRARY VARIABLES, PRESSURE LEVELS & RESOLUTION.
+* ➡️ Стрелка: Ведет к латентному представлению.
+* 🧊 Входной латентный слой: Трёхмерная сетка из кубов.
+* 📝 Подпись сетки: LATENT ATMOSPHERIC INPUT.
+* ➡️ Стрелка: Ведет к центральному процессору.
+* 🧠 Центральный блок: Модель 3D SWIN TRANSFORMER UNET.
+* ➕ Дополнение: Ниже через плюс добавлен оранжевый блок LoRA.
+* ➡️ Стрелка: Ведет к выходному латентному слою.
+* 🧊 Выходной латентный слой: Трёхмерная сетка из кубов.
+* 📝 Подпись сетки: LATENT ATMOSPHERIC OUTPUT.
+* ➡️ Стрелка: Ведет к декодеру.
+* 📦 Декодер: Блок 3D PERCEIVER DECODER.
+* 📝 Подпись декодера: ARBITRARY VARIABLES, PRESSURE LEVELS & RESOLUTION.
+* ➡️ Стрелка: Ведет к результату.
+* 🌍 Выходные данные: Изображение Земли. Подпись: TIME T + 1.
+
+Если вам нужно, я могу детализировать функции конкретного блока или объяснить принцип работы этой архитектуры.
+
+
+На изображении представлена таблица физических переменных, разделенная на три столбца: Variable (Переменная), Units (Единицы измерения) и Description (Описание). Содержимое разбито на 6 тематических блоков:
+## 1. SURFACE-LEVEL METEOROLOGICAL VARIABLES
+
+* 2T | $\text{K}$ | Temperature at $2\,\text{m}$ above surface of land or sea
+* U10 | $\text{ms}^{-1}$ | Eastward component of wind at $10\,\text{m}$
+* V10 | $\text{ms}^{-1}$ | Southward component of wind at $10\,\text{m}$
+* WS | $\text{ms}^{-1}$ | Wind speed at $10\,\text{m}$; equal to $(\text{U}10^2 + \text{V}10^2)^{1/2}$
+* MSL | $\text{Pa}$ | Air pressure at mean sea level
+
+## 2. ATMOSPHERIC METEOROLOGICAL VARIABLES
+
+* U | $\text{ms}^{-1}$ | Eastward component of wind
+* V | $\text{ms}^{-1}$ | Southward component of wind
+* T | $\text{K}$ | Temperature
+* Q | $\text{kg kg}^{-1}$ | Specific humidity
+* Z | $\text{m}^2\text{s}^{-2}$ | Geopotential
+
+## 3. SURFACE-LEVEL POLLUTION VARIABLES
+
+* PM₁ | $\text{kg m}^{-3}$ | Concentration of particulate matter with at most diameter $1\,\mu\text{m}$
+* PM₂.₅ | $\text{kg m}^{-3}$ | Concentration of particulate matter with at most diameter $2.5\,\mu\text{m}$
+* PM₁₀ | $\text{kg m}^{-3}$ | Concentration of particulate matter with at most diameter $10\,\mu\text{m}$
+* TC $x$ | $\text{kg m}^{-2}$ | Total column value of $x$
+
+## 4. ATMOSPHERIC POLLUTION VARIABLES
+
+* CO | $\text{kg m}^{-3}$ | Concentration of carbon monoxide
+* NO | $\text{kg m}^{-3}$ | Concentration of nitrogen monoxide
+* NO₂ | $\text{kg m}^{-3}$ | Concentration of nitrogen dioxide
+* SO₂ | $\text{kg m}^{-3}$ | Concentration of sulphur dioxide
+* O₃ | $\text{kg m}^{-3}$ | Concentration of ozone
+
+## 5. SURFACE-LEVEL WAVE VARIABLES
+
+* 10UN | $\text{ms}^{-1}$ | Eastward component of natural wind at $10\,\text{m}$
+* 10VN | $\text{ms}^{-1}$ | Southward component of natural wind at $10\,\text{m}$
+* WSN | $\text{ms}^{-1}$ | Natural wind speed at $10\,\text{m}$; equal to $(10\text{UN}^2 + 10\text{VN}^2)^{1/2}$
+* PP1D | $\text{s}$ | Peak wave period
+* SWH | $\text{m}$ | Significant wave height of total wave (wind waves plus swell)
+* MWP | $\text{s}$ | Mean wave period of total wave
+* MWD | $\text{degrees}$ | Mean wave direction of total wave (w.r.t. north)
+* SHWW | $\text{m}$ | Significant height of wind waves
+* MPWW | $\text{s}$ | Mean period of wind waves
+* MDWW | $\text{degrees}$ | Mean direction of wind waves (w.r.t. north)
+* SHTS | $\text{m}$ | Significant height of total swell
+* MPTS | $\text{s}$ | Mean period of total swell
+* MDTS | $\text{degrees}$ | Mean direction of total swell (w.r.t. north)
+* SWH1 | $\text{m}$ | Significant height of first swell partition
+* MWP1 | $\text{s}$ | Mean wave period of first swell partition
+* MWD1 | $\text{degrees}$ | Mean direction of first swell partition (w.r.t. north)
+* SWH2 | $\text{m}$ | Significant height of second swell partition
+* MWP2 | $\text{s}$ | Mean wave period of second swell partition
+* MWD2 | $\text{degrees}$ | Mean direction of second swell partition (w.r.t. north)
+
+Если вам требуется перевести описания физических величин на русский язык или найти формулы для их расчета, дайте знать.
+
